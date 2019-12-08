@@ -1,0 +1,119 @@
+﻿<UserControl
+    x:Class="Rate.Views.RateView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Rate.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    d:DesignHeight="550"
+    d:DesignWidth="800"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <StackPanel Margin="0,0,0,0" Orientation="Vertical">
+        <TextBlock
+            FontFamily="{StaticResource OpenSansSemibold}"
+            FontSize="{StaticResource FontSizeLarge}"
+            Text="Update Infrastructures" />
+        <Border
+            Margin="0,20,0,0"
+            Padding="10"
+            Background="White"
+            CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.5" ShadowDepth="2" />
+            </Border.Effect>
+            <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+                <TextBlock
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    Text="Rate (hourly)" />
+                <TextBox
+                    Width="300"
+                    Margin="0,5,400,30"
+                    HorizontalAlignment="Left"
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    Text="{Binding DayPrice, Mode=TwoWay}" />
+
+                <TextBlock
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    Text="Price from 6 pm to 6 am (hourly)"
+                    Visibility="Collapsed" />
+                <TextBox
+                    Width="300"
+                    Margin="0,5,400,30"
+                    HorizontalAlignment="Left"
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    Text="{Binding NightPrice, Mode=TwoWay}"
+                    Visibility="Collapsed" />
+
+                <TextBlock
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    Text="VIP Member Required Time (hour)">
+                    <TextBlock.ToolTip>
+                        <ToolTip Content="Customer must use more than this amount of time to be VIP" />
+                    </TextBlock.ToolTip>
+                </TextBlock>
+                <TextBox
+                    Width="300"
+                    Margin="0,5,400,30"
+                    HorizontalAlignment="Left"
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    Text="{Binding VIPRequiredTime, Mode=TwoWay}" />
+
+                <TextBlock
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    Text="VIP Member Discount (%)">
+                    <TextBlock.ToolTip>
+                        <ToolTip Content="How many percents VIP get discount" />
+                    </TextBlock.ToolTip>
+                </TextBlock>
+                <TextBox
+                    Width="300"
+                    Margin="0,5,400,30"
+                    HorizontalAlignment="Left"
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    Text="{Binding VIPDiscount, Mode=TwoWay}" />
+
+                <Grid Margin="0,0,400,0">
+                   
+                    <Button
+                        Width="150"
+                        Height="40"
+                        Margin="0,0,0,10"
+                        HorizontalAlignment="Left"
+                        Command="{Binding UpdateCommand}"
+                        Content="Update"
+                        FontSize="{StaticResource FontSizeRegular}">
+                        <Button.ToolTip>
+                            <ToolTip Content="Click to confirm Update" />
+                        </Button.ToolTip>
+                    </Button>
+                    <Button
+                        Width="150"
+                        Height="40"
+                        Margin="160,0,0,10"
+                        HorizontalAlignment="Left"
+                        Background="OrangeRed"
+                        Command="{Binding CancelCommand}"
+                        Content="Cancel"
+                        FontSize="{StaticResource FontSizeRegular}">
+                        <Button.ToolTip>
+                            <ToolTip Content="Click to cancel update" />
+                        </Button.ToolTip>
+                    </Button>
+
+                </Grid>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
+

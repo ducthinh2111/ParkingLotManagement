@@ -1,0 +1,150 @@
+﻿<UserControl
+    x:Class="Slot.Views.AddSlotView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:Slot.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <StackPanel Orientation="Vertical">
+        <TextBlock
+            FontFamily="{StaticResource OpenSansSemibold}"
+            FontSize="{StaticResource FontSizeLarge}"
+            Text="Add Slot To A Specific Block" />
+        <Border
+            Margin="0,20,0,0"
+            Padding="10"
+            Background="White"
+            CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.5" ShadowDepth="2" />
+            </Border.Effect>
+
+            <StackPanel Orientation="Vertical">
+
+
+                <TextBlock
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    Text="Block">
+                    <TextBlock.ToolTip>
+                        <ToolTip Content="Choose block to locate slot" />
+                    </TextBlock.ToolTip>
+                </TextBlock>
+                <ComboBox
+                    x:Name="Blockcb"
+                    Width="50"
+                    Margin="0,5,400,30"
+                    HorizontalAlignment="Left"
+                    HorizontalContentAlignment="Center"
+                    DisplayMemberPath="Name"
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeLarge}"
+                    ItemsSource="{Binding BlocksView}"
+                    SelectedValue="{Binding Block, Mode=TwoWay}"
+                    SelectedValuePath="Name">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <prism:InvokeCommandAction Command="{Binding SelectBlockCommand}" CommandParameter="{Binding SelectedValue, ElementName=Blockcb}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <TextBlock
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    Text="Name">
+                    <TextBlock.ToolTip>
+                        <ToolTip Content="Slot's name" />
+                    </TextBlock.ToolTip>
+                </TextBlock>
+
+                <Grid Margin="0,5,400,30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        Grid.Column="0"
+                        FontFamily="{StaticResource OpenSansRegular}"
+                        FontSize="{StaticResource FontSizeRegular}"
+                        IsEnabled="False"
+                        Text="{Binding Path=SelectedValue, ElementName=Blockcb}" />
+                    <TextBox
+                        Grid.Column="1"
+                        FontFamily="{StaticResource OpenSansRegular}"
+                        FontSize="{StaticResource FontSizeRegular}"
+                        IsEnabled="{Binding CanInputName}"
+                        Text="{Binding InputName, Mode=TwoWay}" />
+                </Grid>
+
+                <TextBlock
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    Text="Status">
+                    <TextBlock.ToolTip>
+                        <ToolTip Content="Slot's state" />
+                    </TextBlock.ToolTip>
+                </TextBlock>
+                <ComboBox
+                    Width="100"
+                    Margin="0,5,400,30"
+                    HorizontalAlignment="Left"
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="17"
+                    SelectedValue="{Binding Status, Mode=TwoWay}"
+                    SelectedValuePath="Content">
+                    <ComboBoxItem
+                        Background="{StaticResource VeryGreenBrush}"
+                        Content="Active"
+                        FontFamily="{StaticResource OpenSansRegular}"
+                        FontSize="{StaticResource FontSizeSmall}" />
+                    <ComboBoxItem
+                        Background="{StaticResource OrangeBrush}"
+                        Content="Inactive"
+                        FontFamily="{StaticResource OpenSansRegular}"
+                        FontSize="{StaticResource FontSizeSmall}" />
+
+                </ComboBox>
+
+                <Grid Margin="0,0,400,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Height="40"
+                        Margin="0,0,0,10"
+                        Command="{Binding AddCommand}"
+                        Content="Add"
+                        FontSize="{StaticResource FontSizeRegular}">
+                        <Button.ToolTip>
+                            <ToolTip Content="Click to confirm Add" />
+                        </Button.ToolTip>
+                    </Button>
+                    <Button
+                        Grid.Column="1"
+                        Height="40"
+                        Margin="10,0,0,10"
+                        Background="OrangeRed"
+                        Command="{Binding CancelCommand}"
+                        Content="Cancel"
+                        FontSize="{StaticResource FontSizeRegular}">
+                        <Button.ToolTip>
+                            <ToolTip Content="Click to cancel Add" />
+                        </Button.ToolTip>
+                    </Button>
+
+                </Grid>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
+
+

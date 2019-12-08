@@ -1,0 +1,449 @@
+﻿<UserControl
+    x:Class="User.Views.CustomerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:User.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    d:DesignHeight="728"
+    d:DesignWidth="1366"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Infrastructure;component/Styles/Scroll.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource BackgroundBlueBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Background="{StaticResource BackgroundGreyBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect Opacity="0.3" ShadowDepth="4" />
+            </Grid.Effect>
+
+            <Grid Grid.Row="0" Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0" Source="{Binding Path, FallbackValue='pack://application:,,,/Infrastructure;component/Images/BoyAvatar.png'}" />
+
+                <StackPanel Grid.Column="1" Margin="20,0,0,0">
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource OpenSansLight}"
+                        FontSize="20"
+                        Foreground="White"
+                        Text="Welcome" />
+                    <TextBlock
+                        Margin="0,10,0,10"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource OpenSansSemibold}"
+                        FontSize="20"
+                        Foreground="White"
+                        Text="{Binding UserFullName}" />
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource OpenSansLight}"
+                        FontSize="15"
+                        Foreground="{StaticResource VeryGreenBrush}"
+                        Text="{Binding UserType}" />
+                </StackPanel>
+            </Grid>
+
+            <Rectangle
+                Grid.Row="1"
+                Width="200"
+                Fill="White"
+                Stroke="White"
+                StrokeThickness="1" />
+            <ScrollViewer Grid.Row="2" Margin="0,20,0,20">
+                <ListBox
+                    x:Name="MenuList"
+                    Width="500"
+                    Margin="0,0,0,0"
+                    HorizontalAlignment="Left"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                    SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <prism:InvokeCommandAction Command="{Binding ItemCommand}" CommandParameter="{Binding SelectedItem, ElementName=MenuList}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListBoxItem x:Name="Dashboard">
+                        <StackPanel Margin="30,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="25"
+                                Height="25"
+                                Margin="10"
+                                VerticalAlignment="Top"
+                                Foreground="White"
+                                Kind="ViewDashboard" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="{StaticResource OpenSansLight}"
+                                FontSize="{StaticResource FontSizeSmall}"
+                                Foreground="White"
+                                Text="Dashboard" />
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem x:Name="Search" Visibility="Collapsed">
+                        <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="25"
+                                Height="25"
+                                Margin="10"
+                                VerticalAlignment="Top"
+                                Foreground="White"
+                                Kind="Search" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="{StaticResource OpenSansLight}"
+                                FontSize="{StaticResource FontSizeSmall}"
+                                Foreground="White"
+                                Text="Search" />
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem x:Name="Account" Visibility="Collapsed">
+                        <Expander
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            materialDesign:ExpanderAssist.DownHeaderPadding="0"
+                            Background="{x:Null}"
+                            FontFamily="{StaticResource OpenSansLight}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Foreground="White"
+                            IsExpanded="{Binding IsSelected, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon
+                                        Width="25"
+                                        Height="25"
+                                        Margin="10"
+                                        VerticalAlignment="Top"
+                                        Foreground="White"
+                                        Kind="Account" />
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontFamily="{StaticResource OpenSansLight}"
+                                        FontSize="{StaticResource FontSizeSmall}"
+                                        Foreground="White"
+                                        Text="Account" />
+                                </StackPanel>
+                            </Expander.Header>
+                            <Expander.Content>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon
+                                            Width="25"
+                                            Height="25"
+                                            Margin="10"
+                                            VerticalAlignment="Top"
+                                            Foreground="White"
+                                            Kind="SubdirectoryArrowRight" />
+                                        <Button
+                                            x:Name="AddAccount"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            materialDesign:ButtonProgressAssist.Opacity="0.1"
+                                            Command="{Binding SubItemCommand}"
+                                            CommandParameter="{Binding Path=Content, ElementName=AddAccount}"
+                                            Content="Add Account"
+                                            FontFamily="{StaticResource OpenSansLight}"
+                                            FontSize="{StaticResource FontSizeSmall}"
+                                            Foreground="White"
+                                            Style="{StaticResource WindowControlButton}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon
+                                            Width="25"
+                                            Height="25"
+                                            Margin="10"
+                                            VerticalAlignment="Top"
+                                            Foreground="White"
+                                            Kind="SubdirectoryArrowRight" />
+                                        <Button
+                                            x:Name="ManageAccount"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Command="{Binding SubItemCommand}"
+                                            CommandParameter="{Binding Path=Content, ElementName=ManageAccount}"
+                                            Content="Manage Account"
+                                            FontFamily="{StaticResource OpenSansLight}"
+                                            FontSize="{StaticResource FontSizeSmall}"
+                                            Foreground="White"
+                                            Style="{StaticResource WindowControlButton}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Expander.Content>
+                        </Expander>
+                    </ListBoxItem>
+                    <ListBoxItem x:Name="Infrastructure" Visibility="Collapsed">
+                        <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="25"
+                                Height="25"
+                                Margin="10"
+                                VerticalAlignment="Top"
+                                Foreground="White"
+                                Kind="Information" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="{StaticResource OpenSansLight}"
+                                FontSize="{StaticResource FontSizeSmall}"
+                                Foreground="White"
+                                Text="Infrastructure" />
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem x:Name="Slot" Visibility="Collapsed">
+                        <Expander
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            materialDesign:ExpanderAssist.DownHeaderPadding="0"
+                            Background="{x:Null}"
+                            FontFamily="{StaticResource OpenSansLight}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Foreground="White"
+                            IsExpanded="{Binding IsSelected, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon
+                                        Width="25"
+                                        Height="25"
+                                        Margin="10"
+                                        VerticalAlignment="Top"
+                                        Foreground="White"
+                                        Kind="MapMarkers" />
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontFamily="{StaticResource OpenSansLight}"
+                                        FontSize="{StaticResource FontSizeSmall}"
+                                        Foreground="White"
+                                        Text="Slot" />
+                                </StackPanel>
+                            </Expander.Header>
+                            <Expander.Content>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon
+                                            Width="25"
+                                            Height="25"
+                                            Margin="10"
+                                            VerticalAlignment="Top"
+                                            Foreground="White"
+                                            Kind="SubdirectoryArrowRight" />
+                                        <Button
+                                            x:Name="AddSlot"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            materialDesign:ButtonProgressAssist.Opacity="0.1"
+                                            Command="{Binding SubItemCommand}"
+                                            CommandParameter="{Binding Path=Content, ElementName=AddSlot}"
+                                            Content="Add Slot"
+                                            FontFamily="{StaticResource OpenSansLight}"
+                                            FontSize="{StaticResource FontSizeSmall}"
+                                            Foreground="White"
+                                            Style="{StaticResource WindowControlButton}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon
+                                            Width="25"
+                                            Height="25"
+                                            Margin="10"
+                                            VerticalAlignment="Top"
+                                            Foreground="White"
+                                            Kind="SubdirectoryArrowRight" />
+                                        <Button
+                                            x:Name="ManageSlot"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Command="{Binding SubItemCommand}"
+                                            CommandParameter="{Binding Path=Content, ElementName=ManageSlot}"
+                                            Content="Manage Slot"
+                                            FontFamily="{StaticResource OpenSansLight}"
+                                            FontSize="{StaticResource FontSizeSmall}"
+                                            Foreground="White"
+                                            Style="{StaticResource WindowControlButton}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Expander.Content>
+                        </Expander>
+                    </ListBoxItem>
+                    <ListBoxItem x:Name="Parking" Visibility="Collapsed">
+                        <Expander
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            materialDesign:ExpanderAssist.DownHeaderPadding="0"
+                            Background="{x:Null}"
+                            FontFamily="{StaticResource OpenSansLight}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Foreground="White"
+                            IsExpanded="{Binding IsSelected, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon
+                                        Width="25"
+                                        Height="25"
+                                        Margin="10"
+                                        VerticalAlignment="Top"
+                                        Foreground="White"
+                                        Kind="Parking" />
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontFamily="{StaticResource OpenSansLight}"
+                                        FontSize="{StaticResource FontSizeSmall}"
+                                        Foreground="White"
+                                        Text="Parking" />
+                                </StackPanel>
+                            </Expander.Header>
+                            <Expander.Content>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon
+                                            Width="25"
+                                            Height="25"
+                                            Margin="10"
+                                            VerticalAlignment="Top"
+                                            Foreground="White"
+                                            Kind="SubdirectoryArrowRight" />
+                                        <Button
+                                            x:Name="CheckIn"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            materialDesign:ButtonProgressAssist.Opacity="0.1"
+                                            Command="{Binding SubItemCommand}"
+                                            CommandParameter="{Binding Path=Content, ElementName=CheckIn}"
+                                            Content="Check-in"
+                                            FontFamily="{StaticResource OpenSansLight}"
+                                            FontSize="{StaticResource FontSizeSmall}"
+                                            Foreground="White"
+                                            Style="{StaticResource WindowControlButton}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon
+                                            Width="25"
+                                            Height="25"
+                                            Margin="10"
+                                            VerticalAlignment="Top"
+                                            Foreground="White"
+                                            Kind="SubdirectoryArrowRight" />
+                                        <Button
+                                            x:Name="CheckOut"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Command="{Binding SubItemCommand}"
+                                            CommandParameter="{Binding Path=Content, ElementName=CheckOut}"
+                                            Content="Check-out"
+                                            FontFamily="{StaticResource OpenSansLight}"
+                                            FontSize="{StaticResource FontSizeSmall}"
+                                            Foreground="White"
+                                            Style="{StaticResource WindowControlButton}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon
+                                            Width="25"
+                                            Height="25"
+                                            Margin="10"
+                                            VerticalAlignment="Top"
+                                            Foreground="White"
+                                            Kind="SubdirectoryArrowRight" />
+                                        <Button
+                                            x:Name="ManageParking"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Command="{Binding SubItemCommand}"
+                                            CommandParameter="{Binding Path=Content, ElementName=ManageParking}"
+                                            Content="Manage Parking"
+                                            FontFamily="{StaticResource OpenSansLight}"
+                                            FontSize="{StaticResource FontSizeSmall}"
+                                            Foreground="White"
+                                            Style="{StaticResource WindowControlButton}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Expander.Content>
+                        </Expander>
+                    </ListBoxItem>
+                    <ListBoxItem x:Name="Report">
+                        <StackPanel Margin="30,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="25"
+                                Height="25"
+                                Margin="10"
+                                VerticalAlignment="Top"
+                                Foreground="White"
+                                Kind="FileChart" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="{StaticResource OpenSansLight}"
+                                FontSize="{StaticResource FontSizeSmall}"
+                                Foreground="White"
+                                Text="Personal Report" />
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem x:Name="Logout">
+                        <StackPanel Margin="30,0,0,0" Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="25"
+                                Height="25"
+                                Margin="10"
+                                VerticalAlignment="Top"
+                                Foreground="OrangeRed"
+                                Kind="Logout" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="{StaticResource OpenSansLight}"
+                                FontSize="{StaticResource FontSizeSmall}"
+                                Foreground="OrangeRed"
+                                Text="Logout" />
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
+            </ScrollViewer>
+
+        </Grid>
+
+        <materialDesign:DialogHost Grid.Column="1">
+            <materialDesign:DialogHost.Content>
+                <Border Padding="20">
+                    <ContentControl prism:RegionManager.RegionName="CustomerWorkspaceRegion" />
+                </Border>
+            </materialDesign:DialogHost.Content>
+        </materialDesign:DialogHost>
+    </Grid>
+</UserControl>

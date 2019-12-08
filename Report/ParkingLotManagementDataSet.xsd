@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ParkingLotManagementDataSet" targetNamespace="http://tempuri.org/ParkingLotManagementDataSet.xsd" xmlns:mstns="http://tempuri.org/ParkingLotManagementDataSet.xsd" xmlns="http://tempuri.org/ParkingLotManagementDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ParkingLotManagementConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ParkingLotManagementConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Report.Properties.Settings.GlobalReference.Default.ParkingLotManagementConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MonthlyIncomeTableAdapter" GeneratorDataComponentClassName="MonthlyIncomeTableAdapter" Name="MonthlyIncome" UserDataComponentName="MonthlyIncomeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ParkingLotManagementConnectionString (Settings)" DbObjectName="ParkingLotManagement.dbo.MonthlyIncome" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Month, Income FROM dbo.MonthlyIncome</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Month" DataSetColumn="Month" />
+              <Mapping SourceColumn="Income" DataSetColumn="Income" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ParkingLotManagementDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="ParkingLotManagementDataSet" msprop:Generator_UserDSName="ParkingLotManagementDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="MonthlyIncome" msprop:Generator_TableClassName="MonthlyIncomeDataTable" msprop:Generator_TableVarName="tableMonthlyIncome" msprop:Generator_TablePropName="MonthlyIncome" msprop:Generator_RowDeletingName="MonthlyIncomeRowDeleting" msprop:Generator_RowChangingName="MonthlyIncomeRowChanging" msprop:Generator_RowEvHandlerName="MonthlyIncomeRowChangeEventHandler" msprop:Generator_RowDeletedName="MonthlyIncomeRowDeleted" msprop:Generator_UserTableName="MonthlyIncome" msprop:Generator_RowChangedName="MonthlyIncomeRowChanged" msprop:Generator_RowEvArgName="MonthlyIncomeRowChangeEvent" msprop:Generator_RowClassName="MonthlyIncomeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Month" msprop:Generator_ColumnVarNameInTable="columnMonth" msprop:Generator_ColumnPropNameInRow="Month" msprop:Generator_ColumnPropNameInTable="MonthColumn" msprop:Generator_UserColumnName="Month" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Income" msprop:Generator_ColumnVarNameInTable="columnIncome" msprop:Generator_ColumnPropNameInRow="Income" msprop:Generator_ColumnPropNameInTable="IncomeColumn" msprop:Generator_UserColumnName="Income" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

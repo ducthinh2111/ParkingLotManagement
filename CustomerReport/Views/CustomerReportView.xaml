@@ -1,0 +1,182 @@
+﻿<UserControl
+    x:Class="CustomerReport.Views.CustomerReportView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CustomerReport.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <StackPanel Orientation="Vertical">
+        <Border
+            Margin="0,20,0,0"
+            Padding="10"
+            Background="White"
+            CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.5" ShadowDepth="2" />
+            </Border.Effect>
+            <StackPanel Margin="20,0,0,0" Orientation="Vertical">
+                <TextBox 
+                    Margin="0,5,400,20"
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeLarge}"
+                    IsReadOnly="true"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding ID, Mode=TwoWay}">
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel Orientation="Horizontal" >
+                            <materialDesign:PackIcon
+                                Margin="0,5,0,0"
+                                Kind="AccountCardDetails" 
+                                Foreground="Green"/>
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                FontFamily="{StaticResource OpenSansRegular}"
+                                FontSize="{StaticResource FontSizeRegular}"
+                                Text="ID Card" 
+                                Foreground="Green"
+                                />
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                    <TextBox.ToolTip>
+                        <ToolTip Content="Each account has only one specific ID card number" />
+                    </TextBox.ToolTip>
+                </TextBox>
+
+                <TextBox
+                    Margin="0,5,400,20"
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeLarge}"
+                    IsReadOnly="true"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding FirstName, Mode=TwoWay}">
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Margin="0,5,0,0"
+                                 Foreground="Green"
+                                Kind="Person" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                FontFamily="{StaticResource OpenSansRegular}"
+                                FontSize="{StaticResource FontSizeRegular}"
+                                Foreground="Green"
+                                Text="First Name" />
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                    <TextBox.ToolTip>
+                        <ToolTip Content="Customer's first name" />
+                    </TextBox.ToolTip>
+                </TextBox>
+
+                <TextBox
+                    Margin="0,5,400,30"
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeLarge}"
+                    IsReadOnly="true"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding LastName, Mode=TwoWay}">
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Margin="0,5,0,0"
+                                Foreground="Green"
+                                Kind="Person" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                FontFamily="{StaticResource OpenSansRegular}"
+                                FontSize="{StaticResource FontSizeRegular}"
+                                Foreground="Green"
+                                Text="Last Name" />
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                    <TextBox.ToolTip>
+                        <ToolTip Content="Customer's last name" />
+                    </TextBox.ToolTip>
+                </TextBox>
+
+                <TextBox
+                    Margin="0,5,400,20"
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeLarge}"
+                    IsReadOnly="true"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding TotalUsingTime, Mode=TwoWay}">
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Margin="0,5,0,0"
+                               Foreground="Green"
+                                Kind="Timeline" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                FontFamily="{StaticResource OpenSansRegular}"
+                                FontSize="{StaticResource FontSizeRegular}"
+                                Foreground="Green"
+                                Text="Total Using Time" />
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                    <TextBox.ToolTip>
+                        <ToolTip Content="Total time has been used so far" />
+                    </TextBox.ToolTip>
+                </TextBox>
+
+                <TextBox
+                    Margin="0,5,400,20"
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeLarge}"
+                    IsReadOnly="true"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding TotalUsingMoney, Mode=TwoWay}">
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Margin="0,5,0,0"
+                                Foreground="Green"
+                                Kind="Money" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                FontFamily="{StaticResource OpenSansRegular}"
+                                FontSize="{StaticResource FontSizeRegular}"
+                                Foreground="Green"
+                                Text="Total Using Money" />
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                    <TextBox.ToolTip>
+                        <ToolTip Content="Total money has been paid so far" />
+                    </TextBox.ToolTip>
+                </TextBox>
+
+                <TextBox
+                    Margin="0,5,400,20"
+                    FontFamily="{StaticResource OpenSansRegular}"
+                    FontSize="{StaticResource FontSizeLarge}"
+                    IsReadOnly="true"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding IsVIP, Mode=TwoWay}">
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Margin="0,5,0,0"
+                                 Foreground="Green"
+                                Kind="Card" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                FontFamily="{StaticResource OpenSansRegular}"
+                                FontSize="{StaticResource FontSizeRegular}"
+                                Foreground="Green"
+                                Text="VIP Member" />
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                </TextBox>
+
+            </StackPanel>
+        </Border>
+    </StackPanel>
+
+</UserControl>

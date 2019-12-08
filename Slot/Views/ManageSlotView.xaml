@@ -1,0 +1,337 @@
+﻿<UserControl
+    x:Class="Slot.Views.ManageSlotView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:Slot.Helper"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <local:StatusToBackgroundConverter x:Key="StatusToBackgroundConverter" />
+            <local:AvailabilityToBackgroundConverter x:Key="AvailabilityToBackgroundConverter" />
+            <local:ObjectToBooleanConverter x:Key="ObjectToBooleanConverter" />
+            <local:ObjectToBooleanConverter2 x:Key="ObjectToBooleanConverter2" />
+            <local:SlotIDToLicensePlateConverter x:Key="SlotIDToLicensePlateConverter" />
+            <local:SlotIDToCheckInTimeConverter x:Key="SlotIDToCheckInTimeConverter" />
+            <local:SlotIDToSecurityCodeConverter x:Key="SlotIDToSecurityCodeConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Infrastructure;component/Styles/Scroll.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DialogHost.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel Orientation="Vertical">
+        <TextBlock
+            FontFamily="{StaticResource OpenSansSemibold}"
+            FontSize="{StaticResource FontSizeLarge}"
+            Text="Manage Slot" />
+        <Button
+            Margin="0,10,700,0"
+            Command="{Binding AddSlotCommand}"
+            Content="Add Slot">
+            <Button.ToolTip>
+                <ToolTip Content="Add more slots?" />
+            </Button.ToolTip>
+        </Button>
+        <Border
+            Margin="0,20,0,0"
+            Padding="10"
+            Background="White"
+            CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.5" ShadowDepth="2" />
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource OpenSansRegular}"
+                        FontSize="{StaticResource FontSizeRegular}"
+                        Text="Block: " />
+                    <ComboBox
+                        x:Name="cb"
+                        Width="100"
+                        Margin="20,0,0,0"
+                        HorizontalContentAlignment="Center"
+                        DisplayMemberPath="Name"
+                        FontFamily="{StaticResource OpenSansRegular}"
+                        FontSize="{StaticResource FontSizeLarge}"
+                        ItemsSource="{Binding BlocksView}"
+                        SelectedValue="{Binding SelectedBlock}"
+                        SelectedValuePath="Name">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <prism:InvokeCommandAction Command="{Binding SelectBlockCommand}" CommandParameter="{Binding SelectedValue, ElementName=cb}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+
+                    <Button
+                        Margin="50,10,700,0"
+                        Background="DarkOrange"
+                        Command="{Binding ViewAllCommand}"
+                        Content="View All">
+                        <Button.ToolTip>
+                            <ToolTip Content="View slots of all blocks" />
+                        </Button.ToolTip>
+                    </Button>
+                </StackPanel>
+                <Grid Grid.Row="1" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Rectangle
+                            Opacity="0.2"
+                            Stroke="Black"
+                            StrokeThickness="1" />
+                        <TextBlock
+                            Padding="5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource OpenSansSemibold}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Text="Name" />
+                        <Button
+                            Margin="120,0,0,0"
+                            HorizontalAlignment="Right"
+                            Command="{Binding OrderByNameCommand}"
+                            Style="{StaticResource MaterialDesignFlatButton}">
+                            <materialDesign:PackIcon Kind="Sort" />
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Rectangle
+                            Opacity="0.2"
+                            Stroke="Black"
+                            StrokeThickness="1" />
+                        <TextBlock
+                            Padding="5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource OpenSansSemibold}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Text="Status" />
+                        <Button
+                            Margin="120,0,0,0"
+                            HorizontalAlignment="Right"
+                            Command="{Binding OrderByStatusCommand}"
+                            Style="{StaticResource MaterialDesignFlatButton}">
+                            <materialDesign:PackIcon Kind="Sort" />
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Rectangle
+                            Opacity="0.2"
+                            Stroke="Black"
+                            StrokeThickness="1" />
+                        <TextBlock
+                            Padding="5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource OpenSansSemibold}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Text="Availability" />
+                        <Button
+                            Margin="120,0,0,0"
+                            HorizontalAlignment="Right"
+                            Command="{Binding OrderByAvailabilityCommand}"
+                            Style="{StaticResource MaterialDesignFlatButton}">
+
+                            <materialDesign:PackIcon Kind="Sort" />
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <Rectangle
+                            Opacity="0.2"
+                            Stroke="Black"
+                            StrokeThickness="1" />
+                        <TextBlock
+                            Padding="5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource OpenSansSemibold}"
+                            FontSize="{StaticResource FontSizeSmall}"
+                            Text="Action" />
+                    </Grid>
+                </Grid>
+                <ItemsControl
+                    Grid.Row="2"
+                    MaxHeight="{Binding MaxHeight}"
+                    ItemsSource="{Binding SlotsView}">
+
+                    <ItemsControl.Template>
+                        <ControlTemplate>
+                            <ScrollViewer>
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <TextBlock
+                                            Padding="5"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            FontFamily="{StaticResource OpenSansRegular}"
+                                            FontSize="{StaticResource FontSizeSmall}"
+                                            Text="{Binding Name}" />
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <TextBlock
+                                            x:Name="StatusTextBlock"
+                                            Width="70"
+                                            Padding="5"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Background="{Binding Path=Text, ElementName=StatusTextBlock, Converter={StaticResource StatusToBackgroundConverter}}"
+                                            FontFamily="{StaticResource OpenSansBold}"
+                                            FontSize="{StaticResource FontSizeSmall}"
+                                            Foreground="White"
+                                            Text="{Binding Status}" />
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <TextBlock
+                                            x:Name="AvailabilityTextBlock"
+                                            Width="70"
+                                            Padding="5"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Background="{Binding Path=Text, ElementName=AvailabilityTextBlock, Converter={StaticResource AvailabilityToBackgroundConverter}}"
+                                            FontFamily="{StaticResource OpenSansBold}"
+                                            FontSize="{StaticResource FontSizeSmall}"
+                                            Foreground="White"
+                                            Text="{Binding Availability}" />
+                                    </Grid>
+                                    <Grid Grid.Column="3">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button
+                                                Margin="5"
+                                                Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext.EditSlotCommand}"
+                                                CommandParameter="{Binding}"
+                                                IsEnabled="{Binding Converter={StaticResource ObjectToBooleanConverter}}">
+                                                <materialDesign:PackIcon Kind="Pencil" />
+                                                <Button.ToolTip>
+                                                    <ToolTip Content="Edit information of slot" />
+                                                </Button.ToolTip>
+                                            </Button>
+                                            <Button
+                                                Margin="5"
+                                                Background="OrangeRed"
+                                                Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext.DeleteSlotCommand}"
+                                                CommandParameter="{Binding}"
+                                                IsEnabled="{Binding Converter={StaticResource ObjectToBooleanConverter}}">
+                                                <materialDesign:PackIcon Kind="Delete" />
+                                                <Button.ToolTip>
+                                                    <ToolTip Content="Delete this slot?" />
+                                                </Button.ToolTip>
+                                            </Button>
+                                            <Button
+                                                Margin="5"
+                                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                                IsEnabled="{Binding Converter={StaticResource ObjectToBooleanConverter2}}">
+                                                <materialDesign:PackIcon Kind="Motorbike" />
+                                                <Button.ToolTip>
+                                                    <ToolTip Content="Check out this slot?" />
+                                                </Button.ToolTip>
+                                                <Button.CommandParameter>
+                                                    <Border
+                                                        Width="300"
+                                                        Height="320"
+                                                        Padding="10">
+                                                        <StackPanel Orientation="Vertical">
+                                                            <TextBlock
+                                                                FontFamily="{StaticResource OpenSansRegular}"
+                                                                FontSize="{StaticResource FontSizeRegular}"
+                                                                Text="License Plate" />
+                                                            <TextBox
+                                                                Margin="0,5,0,0"
+                                                                materialDesign:TextFieldAssist.UnderlineBrush="Purple"
+                                                                FontFamily="{StaticResource OpenSansRegular}"
+                                                                FontSize="{StaticResource FontSizeRegular}"
+                                                                IsReadOnly="True"
+                                                                Text="{Binding Path=ID, Converter={StaticResource SlotIDToLicensePlateConverter}}" />
+
+                                                            <TextBlock
+                                                                Margin="0,10,0,0"
+                                                                FontFamily="{StaticResource OpenSansRegular}"
+                                                                FontSize="{StaticResource FontSizeRegular}"
+                                                                Text="Check-in" />
+                                                            <TextBox
+                                                                Margin="0,5,0,0"
+                                                                materialDesign:TextFieldAssist.UnderlineBrush="Purple"
+                                                                FontFamily="{StaticResource OpenSansRegular}"
+                                                                FontSize="{StaticResource FontSizeRegular}"
+                                                                IsReadOnly="True"
+                                                                Text="{Binding Path=ID, Converter={StaticResource SlotIDToCheckInTimeConverter}}" />
+
+                                                            <TextBlock
+                                                                Margin="0,10,0,0"
+                                                                FontFamily="{StaticResource OpenSansRegular}"
+                                                                FontSize="{StaticResource FontSizeRegular}"
+                                                                Text="Security Code" />
+                                                            <TextBox
+                                                                Margin="0,5,0,0"
+                                                                materialDesign:TextFieldAssist.UnderlineBrush="Purple"
+                                                                FontFamily="{StaticResource OpenSansRegular}"
+                                                                FontSize="{StaticResource FontSizeRegular}"
+                                                                IsReadOnly="True"
+                                                                Text="{Binding Path=ID, Converter={StaticResource SlotIDToSecurityCodeConverter}}" />
+                                                            <Button
+                                                                Margin="0,10,0,0"
+                                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                                                Content="Done"
+                                                                FontFamily="{StaticResource OpenSansRegular}"
+                                                                FontSize="{StaticResource FontSizeRegular}"
+                                                                Foreground="Purple"
+                                                                Style="{StaticResource MaterialDesignFlatButton}" />
+
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                                <Rectangle Height="1" Fill="#007ACC" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+            </Grid>
+        </Border>
+    </StackPanel>
+
+</UserControl>

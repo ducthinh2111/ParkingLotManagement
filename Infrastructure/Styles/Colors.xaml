@@ -1,0 +1,30 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Infrastructure.Styles">
+    <Color x:Key="White">#fdfdfd</Color>
+    <SolidColorBrush
+        x:Key="OpacityWhite"
+        Opacity="0.1"
+        Color="{StaticResource White}" />
+
+    <Color x:Key="BackgroundBlue">#EBEEF5</Color>
+    <SolidColorBrush x:Key="BackgroundBlueBrush" Color="{StaticResource BackgroundBlue}" />
+
+    <Color x:Key="BackgroundVeryBlue">#2B57B7</Color>
+    <SolidColorBrush x:Key="BackgroundVeryBlueBrush" Color="{StaticResource BackgroundVeryBlue}" />
+
+    <Color x:Key="BackgroundGrey">#414550</Color>
+    <SolidColorBrush x:Key="BackgroundGreyBrush" Color="{StaticResource BackgroundGrey}" />
+
+    <Color x:Key="VeryGreen">#00FF00</Color>
+    <SolidColorBrush x:Key="VeryGreenBrush" Color="{StaticResource VeryGreen}" />
+
+    <Color x:Key="Orange">#FF931E</Color>
+    <SolidColorBrush x:Key="OrangeBrush" Color="{StaticResource Orange}" />
+
+    <Color x:Key="Green">#029A51</Color>
+    <SolidColorBrush x:Key="GreenBrush" Color="{StaticResource Green}" />
+
+
+</ResourceDictionary>

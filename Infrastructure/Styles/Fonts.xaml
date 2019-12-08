@@ -1,0 +1,14 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Infrastructure.Styles"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <FontFamily x:Key="OpenSansRegular">pack://application:,,,/Infrastructure;component/Fonts/#Open Sans</FontFamily>
+    <FontFamily x:Key="OpenSansSemibold">pack://application:,,,/Infrastructure;component/Fonts/#Open Sans Semibold</FontFamily>
+    <FontFamily x:Key="OpenSansLight">pack://application:,,,/Infrastructure;component/Fonts/#Open Sans Light</FontFamily>
+    <FontFamily x:Key="OpenSansBold">pack://application:,,,/Infrastructure;component/Fonts/#Open Sans Bold</FontFamily>
+
+    <system:Double x:Key="FontSizeRegular">20</system:Double>
+    <system:Double x:Key="FontSizeSmall">15</system:Double>
+    <system:Double x:Key="FontSizeLarge">30</system:Double>
+</ResourceDictionary>

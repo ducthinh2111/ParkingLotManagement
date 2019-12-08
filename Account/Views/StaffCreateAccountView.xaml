@@ -1,0 +1,282 @@
+﻿<UserControl
+    x:Class="Account.Views.StaffCreateAccountView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:Account.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Infrastructure;component/Styles/Scroll.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border>
+        <StackPanel Margin="0,0,0,-235" Orientation="Vertical">
+            <TextBlock
+                FontFamily="{StaticResource OpenSansSemibold}"
+                FontSize="{StaticResource FontSizeLarge}"
+                Text="Create Customer Account" />
+            <Border
+                Margin="0,20,0,0"
+                Padding="10"
+                Background="White"
+                CornerRadius="10">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.5" ShadowDepth="2" />
+                </Border.Effect>
+                <ScrollViewer
+                    Height="637"
+                    MaxHeight="{Binding MaxHeight}"
+                    VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <TextBox
+                            Margin="0,5,400,10"
+                            FontFamily="{StaticResource OpenSansRegular}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding ID, Mode=TwoWay}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="{StaticResource OrangeBrush}" Kind="AccountCardDetails" />
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        FontFamily="{StaticResource OpenSansRegular}"
+                                        FontSize="{StaticResource FontSizeSmall}"
+                                        Foreground="{StaticResource OrangeBrush}"
+                                        Text="ID Card" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                            <TextBox.ToolTip>
+                                <ToolTip Content="Each account has only one specific ID card number" />
+                            </TextBox.ToolTip>
+                        </TextBox>
+
+                        <TextBox
+                            Margin="0,5,400,10"
+                            FontFamily="{StaticResource OpenSansRegular}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding FirstName, Mode=TwoWay}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="{StaticResource OrangeBrush}" Kind="Person" />
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        FontFamily="{StaticResource OpenSansRegular}"
+                                        FontSize="{StaticResource FontSizeSmall}"
+                                        Foreground="{StaticResource OrangeBrush}"
+                                        Text="First Name" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                            <TextBox.ToolTip>
+                                <ToolTip Content="Customer's first name" />
+                            </TextBox.ToolTip>
+                        </TextBox>
+
+                        <TextBox
+                            Margin="0,5,400,10"
+                            FontFamily="{StaticResource OpenSansRegular}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding LastName, Mode=TwoWay}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="{StaticResource OrangeBrush}" Kind="Person" />
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        FontFamily="{StaticResource OpenSansRegular}"
+                                        FontSize="{StaticResource FontSizeSmall}"
+                                        Foreground="{StaticResource OrangeBrush}"
+                                        Text="Last Name" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                            <TextBox.ToolTip>
+                                <ToolTip Content="Customer's last name" />
+                            </TextBox.ToolTip>
+                        </TextBox>
+
+                        <DatePicker
+                            Width="150"
+                            Margin="0,5,400,10"
+                            HorizontalAlignment="Left"
+                            FontFamily="{StaticResource OpenSansRegular}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            SelectedDate="{Binding BirthDay, Mode=TwoWay}"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="{StaticResource OrangeBrush}" Kind="Cake" />
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        FontFamily="{StaticResource OpenSansRegular}"
+                                        FontSize="{StaticResource FontSizeSmall}"
+                                        Foreground="{StaticResource OrangeBrush}"
+                                        Text="BirthDay" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                            <DatePicker.ToolTip>
+                                <ToolTip Content="Customer's day of birth" />
+                            </DatePicker.ToolTip>
+                        </DatePicker>
+
+                        <ComboBox
+                            Width="150"
+                            Margin="0,5,400,10"
+                            HorizontalAlignment="Left"
+                            FontFamily="{StaticResource OpenSansRegular}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            SelectedValue="{Binding Gender}"
+                            SelectedValuePath="Content"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="{StaticResource OrangeBrush}" Kind="GenderMaleFemale" />
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        FontFamily="{StaticResource OpenSansRegular}"
+                                        FontSize="{StaticResource FontSizeSmall}"
+                                        Foreground="{StaticResource OrangeBrush}"
+                                        Text="Gender" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                            <ComboBoxItem>
+                                Male
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                Female
+                            </ComboBoxItem>
+                            <ComboBox.ToolTip>
+                                <ToolTip Content="Customer's gender" />
+                            </ComboBox.ToolTip>
+                        </ComboBox>
+
+                        <TextBox
+                            Margin="0,5,400,10"
+                            FontFamily="{StaticResource OpenSansRegular}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding Email, Mode=TwoWay}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="{StaticResource OrangeBrush}" Kind="Email" />
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        FontFamily="{StaticResource OpenSansRegular}"
+                                        FontSize="{StaticResource FontSizeSmall}"
+                                        Foreground="{StaticResource OrangeBrush}"
+                                        Text="Email" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                            <TextBox.ToolTip>
+                                <ToolTip Content="Customer's email" />
+                            </TextBox.ToolTip>
+                        </TextBox>
+
+                        <TextBox
+                            Margin="0,5,400,10"
+                            FontFamily="{StaticResource OpenSansRegular}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding PhoneNumber, Mode=TwoWay}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="{StaticResource OrangeBrush}" Kind="Phone" />
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        FontFamily="{StaticResource OpenSansRegular}"
+                                        FontSize="{StaticResource FontSizeSmall}"
+                                        Foreground="{StaticResource OrangeBrush}"
+                                        Text="Phone Number" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                            <TextBox.ToolTip>
+                                <ToolTip Content="Customer's phone number for emergency" />
+                            </TextBox.ToolTip>
+                        </TextBox>
+
+                        <TextBox
+                            Margin="0,5,400,10"
+                            FontFamily="{StaticResource OpenSansRegular}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding Username, Mode=TwoWay}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="{StaticResource OrangeBrush}" Kind="AccountCardDetails" />
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        FontFamily="{StaticResource OpenSansRegular}"
+                                        FontSize="{StaticResource FontSizeSmall}"
+                                        Foreground="{StaticResource OrangeBrush}"
+                                        Text="Username" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                            <TextBox.ToolTip>
+                                <ToolTip Content="Customer's UsernName" />
+                            </TextBox.ToolTip>
+                        </TextBox>
+
+                        <PasswordBox
+                            x:Name="PsBox"
+                            Margin="0,5,400,10"
+                            FontFamily="{StaticResource OpenSansRegular}"
+                            FontSize="{StaticResource FontSizeRegular}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PasswordChanged">
+                                    <prism:InvokeCommandAction Command="{Binding PasswordChangeCommand}" CommandParameter="{Binding ElementName=PsBox}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="{StaticResource OrangeBrush}" Kind="TextboxPassword" />
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        FontFamily="{StaticResource OpenSansRegular}"
+                                        FontSize="{StaticResource FontSizeSmall}"
+                                        Foreground="{StaticResource OrangeBrush}"
+                                        Text="Password" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                            <PasswordBox.ToolTip>
+                                <ToolTip Content="Customer's password" />
+                            </PasswordBox.ToolTip>
+                        </PasswordBox>
+
+                        <Grid Margin="0,20,400,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button
+                                Grid.Column="0"
+                                Height="40"
+                                Margin="0,0,0,10"
+                                Command="{Binding CreateCommand}"
+                                Content="Create"
+                                FontSize="{StaticResource FontSizeRegular}" />
+                            <Button
+                                Grid.Column="1"
+                                Height="40"
+                                Margin="10,0,0,10"
+                                Background="OrangeRed"
+                                Command="{Binding CancelCommand}"
+                                Content="Cancel"
+                                FontSize="{StaticResource FontSizeRegular}" />
+
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+
+            </Border>
+        </StackPanel>
+    </Border>
+</UserControl>

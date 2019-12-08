@@ -1,0 +1,64 @@
+﻿<UserControl
+    x:Class="Account.Views.CreateAccountView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:designMaterial="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:Account.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <Border>
+        <StackPanel Orientation="Vertical">
+            <TextBlock
+                FontFamily="{StaticResource OpenSansSemibold}"
+                FontSize="{StaticResource FontSizeLarge}"
+                Text="Create Account" />
+            <Border
+                Margin="0,20,0,0"
+                Padding="10"
+                Background="White"
+                CornerRadius="10">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.5" ShadowDepth="2" />
+                </Border.Effect>
+                <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource OpenSansRegular}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Text="Account Type:" />
+
+                        <Border>
+                            <ComboBox
+                                Foreground="OrangeRed"
+                                x:Name="cb"
+                                Margin="20,0,0,0"
+                                FontFamily="{StaticResource OpenSansRegular}"
+                                FontSize="{StaticResource FontSizeRegular}"
+                                SelectedIndex="0">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <prism:InvokeCommandAction Command="{Binding ItemCommand}" CommandParameter="{Binding SelectedItem, ElementName=cb}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <ComboBoxItem>Staff</ComboBoxItem>
+                                <ComboBoxItem>Customer</ComboBoxItem>
+                            </ComboBox>
+                        </Border>
+                    </StackPanel>
+                    <Grid Margin="0,10,0,0">
+                        <ContentControl prism:RegionManager.RegionName="CreateAccountRegion" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</UserControl>
+
