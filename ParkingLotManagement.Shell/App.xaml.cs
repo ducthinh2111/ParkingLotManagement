@@ -31,7 +31,6 @@ namespace ParkingLotManagement.Shell
             moduleCatalog.AddModule<Search.SearchModule>();
             moduleCatalog.AddModule<Dashboard.DashboardModule>();
             moduleCatalog.AddModule<CustomerReport.CustomerReportModule>();
-            moduleCatalog.AddModule<Report.ReportModule>();
         }
 
         protected override Window CreateShell()
